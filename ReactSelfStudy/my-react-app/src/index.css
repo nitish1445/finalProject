@@ -1,0 +1,45 @@
+#homeDiv {
+  font-size: 64px;
+  font-weight: bold;
+  margin-top: 72px;
+  color: rgb(211, 125, 63);
+}
+.homeClass {
+  color: white;
+  text-align: center;
+  padding: 12px 160px;
+}
+#homePara {
+  font-size: 32px;
+  font-weight: 400;
+  color: rgb(65, 187, 146);
+}
+body {
+  background-color: black !important;
+}
+#imageHeader {
+  width: 48px;
+  height: 48px;
+}
+.headerText:hover {
+  color: gold !important;
+}
+#aboutText {
+  text-align: center;
+  padding: 120px 180px;
+  color: white;
+  h1 {
+    font-size: 56px;
+    font-weight: bold;
+    color: rgb(211, 125, 63);
+  }
+  #aboutDetail {
+    color: rgb(65, 187, 146);
+  }
+}
+#coursesDetail {
+  img {
+    height: 170px;
+    width: 272px;
+  }
+}
