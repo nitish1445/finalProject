@@ -5,8 +5,8 @@ const Register = () => {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
-    monileNumber: "",
-    dob: "",
+    mobileNumber: "",
+    Dob: "",
     qualification: "",
     score: "",
     course: "",
@@ -30,28 +30,27 @@ const Register = () => {
       fullName: "",
       email: "",
       mobileNumber: "",
-      dateOfBirth: "",
-      lastQualification: "",
-      percentageGrade: "",
-      preferredCourse: "",
-      batchTiming: "",
-      residentialAddress: "",
+      Dob: "",
+      qualification: "",
+      score: "",
+      course: "",
+      batch: "",
+      address: "",
       city: "",
       pinCode: "",
       guardianName: "",
       guardianContact: "",
-      hearAboutUs: "",
-      specialRequirements: "",
+      coachingInfo: "",
     });
   };
   const validate = () => {
     let Error = {};
 
     if (formData.fullName.length < 3) {
-      Error.fullName = "Name should be More Than 3 Characters";
+      Error.fullName = "Name should be More Than 3 Characters.";
     } else {
       if (!/^[A-Za-z ]+$/.test(formData.fullName)) {
-        Error.fullName = "Only Contain A-Z , a-z and space";
+        Error.fullName = "Only Contain A-Z , a-z and space.";
       }
     }
 
@@ -60,11 +59,12 @@ const Register = () => {
         formData.email
       )
     ) {
-      Error.email = "Use Proper Email Format";
+      Error.email = "Use Proper Email Format.";
     }
 
     if (!/^[6-9]\d{9}$/.test(formData.mobileNumber)) {
-      Error.mobileNumber = "Only Indian Mobile Number allowed";
+      Error.mobileNumber =
+        "Only Indian Mobile Number allowed without 0 and +91.";
     }
 
     setValidationError(Error);
@@ -76,13 +76,13 @@ const Register = () => {
     e.preventDefault();
 
     if (!validate()) {
-      toast.error("Fill the Form Correctly");
+      toast.error("Fill the Form Correctly.");
       return;
     }
 
     try {
       console.log(formData);
-      toast.success("Regisrtation Successfull");
+      toast.success("Regisrtation Successfull.");
       handleClearForm();
     } catch (error) {
       console.log(error);
@@ -92,82 +92,103 @@ const Register = () => {
 
   return (
     <>
-      <div className="bg-amber-50 py-2 px-70">
+      <div className="py-2 px-70">
         {/* Header */}
 
-        <div className="text-center pb-2">
-          <h1 className="text-gray-900 mb-1">Student Registration</h1>
-          <p className="text-lg text-gray-600">
-            Join our academy and start your learning journey
+        <div className="text-center py-2 mb-3">
+          <h1 className="text-3xl font-bold pt-2 text-cyan-900 text-shadow-amber-600 text-shadow-xs">
+            Student Registration
+          </h1>
+          <p className="text-s text-gray-600">
+            Join our academy and start your learning journey.
           </p>
         </div>
         {/* Form Container */}
         <form onSubmit={handleSubmit} onReset={handleClearForm}>
-          <div className=" container border-2 border-blue-100 rounded shadow bg-white">
+          <div className=" container rounded shadow-lg bg-amber-50">
             {/* Personal Information */}
 
             <div className="mt-4 flex flex-col px-5 ">
-              <h3>Personal Information</h3>
-              <div className=" border border-e-black rounded shadow p-3 ">
+              <h3 className="text-2xl font-bold py-2 text-blue-600 text-shadow-pink-200 text-shadow-md">
+                Personal Informations
+              </h3>
+              <div className=" border border-e-black rounded shadow p-3 bg-white">
                 <div className="flex gap-4 px-2">
                   <label htmlFor="fullName" className="w-60 gap-3">
-                    Full Name :
+                    Full Name <span className="text-red-600 text-2xl">*</span> :
                   </label>
 
-                  <input
-                    type="text"
-                    name="fullName"
-                    id="fullName"
-                    placeholder="Enter your full name"
-                    value={formData.fullName}
-                    onChange={handleChange}
-                    className="px-3 py-1 font-medium border border-gray-300 rounded shadow-2xs w-7xl"
-                  />
-                  {validationError.fullName && (
-                    <span className="text-xs text-red-500">
-                      {validationError.fullName}
-                    </span>
-                  )}
+                  <div className="w-7xl flex flex-col text-end">
+                    <input
+                      type="text"
+                      name="fullName"
+                      id="fullName"
+                      placeholder="Enter your full name"
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      className="px-3 py-1 border border-gray-300 rounded shadow-2xs "
+                    />
+                    {validationError.fullName && (
+                      <span className="text-xs text-red-500">
+                        {validationError.fullName}
+                      </span>
+                    )}
+                  </div>
                 </div>
                 <div className="mx-2 flex gap-4 pt-3">
                   <label htmlFor="email" className="gap-3 w-60">
-                    Email :
+                    Email <span className="text-red-600 text-2xl">*</span> :
                   </label>
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    placeholder="Enter your email address"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="px-3 py-1 font-medium border border-gray-300 rounded shadow-2xs w-7xl"
-                  />
+                  <div className="w-7xl flex flex-col text-end">
+                    <input
+                      type="email"
+                      name="email"
+                      id="email"
+                      placeholder="Enter your email address"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="px-3 py-1 border border-gray-300 rounded shadow-2xs"
+                    />
+                    {validationError.email && (
+                      <span className="text-xs text-red-500">
+                        {validationError.email}
+                      </span>
+                    )}
+                  </div>
                 </div>
                 <div className="mx-2 flex gap-4 pt-3">
                   <label htmlFor="mobileNumber" className="gap-3 w-60 ">
-                    Mob No. :
+                    Mobile No. <span className="text-red-600 text-2xl">*</span>{" "}
+                    :
                   </label>
-                  <input
-                    type="text"
-                    name="mobileNumber"
-                    id="mobileNumber"
-                    placeholder="Enter your mobile number"
-                    value={formData.mobileNumber}
-                    onChange={handleChange}
-                    className="px-3 py-1 font-medium border border-gray-300 rounded shadow-2xs w-7xl"
-                  />
+                  <div className="w-7xl flex flex-col text-end">
+                    <input
+                      type="text"
+                      name="mobileNumber"
+                      id="mobileNumber"
+                      placeholder="Enter your mobile number"
+                      value={formData.mobileNumber}
+                      onChange={handleChange}
+                      className="px-3 py-1 border border-gray-300 rounded shadow-2xs"
+                    />
+                    {validationError.mobileNumber && (
+                      <span className="text-xs text-red-500">
+                        {validationError.mobileNumber}
+                      </span>
+                    )}
+                  </div>
                 </div>
                 <div className="mx-2 flex gap-4 pt-3 ">
                   <label htmlFor="D.O.B" className="gap-3 w-60">
-                    D. O. B. :
+                    Date of Birth :
                   </label>
                   <input
                     type="date"
                     name="Dob"
                     id="Dob"
-                    value={formData.dob}
+                    value={formData.Dob}
                     onChange={handleChange}
-                    className="px-3 py-1 font-medium border border-gray-300 rounded shadow-2xs w-7xl"
+                    className="px-3 py-1 border border-gray-300 rounded shadow-2xs w-7xl"
                   />
                 </div>
               </div>
@@ -176,10 +197,12 @@ const Register = () => {
             {/* Academic Details */}
 
             <div className="mt-4 flex flex-col px-5 ">
-              <h3 className=" text-blue-500">Academic Details</h3>
-              <div className="border border-e-black rounded shadow p-3">
+              <h3 className="text-2xl font-bold py-2 text-blue-600 text-shadow-pink-200 text-shadow-md">
+                Academic Details
+              </h3>
+              <div className="border border-e-black rounded shadow p-3 bg-white">
                 <div className="px-2 flex gap-4 pt-3 ">
-                  <label htmlFor="qualification" className="">
+                  <label htmlFor="qualification" className="gap-3 w-60">
                     Qualifications :
                   </label>
                   <select
@@ -187,7 +210,7 @@ const Register = () => {
                     id="qualification"
                     value={formData.qualification}
                     onChange={handleChange}
-                    className="px-3 py-1 font-medium border border-gray-300 rounded shadow-2xs w-7xl"
+                    className="px-3 py-1 border border-gray-300 rounded shadow-2xs w-7xl"
                   >
                     <option value="">--Select Qualification--</option>
                     <option value="10">High School</option>
@@ -208,7 +231,7 @@ const Register = () => {
                     placeholder="Enter your grade in percentages"
                     value={formData.score}
                     onChange={handleChange}
-                    className="px-3 py-1 font-medium border border-gray-300 rounded shadow-2xs w-7xl"
+                    className="px-3 py-1 border border-gray-300 rounded shadow-2xs w-7xl"
                   />
                 </div>
               </div>
@@ -216,8 +239,10 @@ const Register = () => {
 
             {/* course Information */}
             <div className="mt-4 flex flex-col px-5 ">
-              <h3 className=" text-blue-500">Course Information</h3>
-              <div className="border border-e-black rounded shadow p-3 ">
+              <h3 className="text-2xl font-bold py-2 text-blue-600 text-shadow-pink-200 text-shadow-md">
+                Course Informations
+              </h3>
+              <div className="border border-e-black rounded shadow p-3 bg-white">
                 <div className="mx-2 flex gap-4 pt-3 ">
                   <label htmlFor="course" className="gap-3 w-60">
                     Available Courses :
@@ -227,7 +252,7 @@ const Register = () => {
                     id="course"
                     value={formData.course}
                     onChange={handleChange}
-                    className="px-3 py-1 font-medium border border-gray-300 rounded shadow-2xs w-7xl"
+                    className="px-3 py-1 border border-gray-300 rounded shadow-2xs w-7xl"
                   >
                     <option value="">--Select Course--</option>
                     <option value="FSD">Full Stack Development</option>
@@ -238,72 +263,45 @@ const Register = () => {
                   </select>
                 </div>
 
-                <div className="mx-2 flex gap-5 pt-3 ">
-                  <label htmlFor="batch" className="">
-                    Perfered Batch :
+                <div className="mx-2 flex gap-4 pt-3 ">
+                  <label htmlFor="batch" className="gap-3 w-60">
+                    Perffered Batch :
                   </label>
-                  <div className="flex gap-3 cursor">
-                    <div className="flex gap-2">
-                      <input
-                        type="checkbox"
-                        name="batch"
-                        id="morning"
-                        value="morning"
-                        className=" cursor-pointer"
-                      />
-                      <span>Morning</span>
-                    </div>
-                    <div className="flex gap-2">
-                      <input
-                        type="checkbox"
-                        name="batch"
-                        id="afternoon"
-                        value="afternoon"
-                        className=" cursor-pointer"
-                      />
-                      <span>Afternoon</span>
-                    </div>
-                    <div className="flex gap-2">
-                      <input
-                        type="checkbox"
-                        name="batch"
-                        id="evening"
-                        value="evening"
-                        className=" cursor-pointer"
-                      />
-                      <span>Evening</span>
-                    </div>
-                    <div className="flex gap-2">
-                      <input
-                        type="checkbox"
-                        name="batch"
-                        id="weekends"
-                        value="weekends"
-                        className=" cursor-pointer"
-                      />
-                      <span>Weekends</span>
-                    </div>
-                  </div>
+                  <select
+                    name="batch"
+                    id="batch"
+                    value={formData.batch}
+                    onChange={handleChange}
+                    className="px-3 py-1 border border-gray-300 rounded shadow-2xs w-7xl"
+                  >
+                    <option value="">--Select Preffered Batches--</option>
+                    <option value="morning">Morning</option>
+                    <option value="afternoon">Afternoon</option>
+                    <option value="evening">Evening</option>
+                    <option value="weekdays">Weekdays</option>
+                  </select>
                 </div>
               </div>
             </div>
 
             {/* Address */}
             <div className="mt-4 flex flex-col px-5 ">
-              <h3 className=" text-blue-500">Address</h3>
-              <div className="border border-e-black rounded shadow p-3">
+              <h3 className="text-2xl font-bold py-2 text-blue-600 text-shadow-pink-200 text-shadow-md">
+                Address Informations
+              </h3>
+              <div className="border border-e-black rounded shadow p-3 bg-white">
                 <div className="mx-2 flex  gap-4 pt-3 ">
                   <label htmlFor="address" className="gap-3 w-60 ">
                     Residental :
                   </label>
-                  <input
+                  <textarea
                     type="text"
                     name="address"
                     id="address"
                     placeholder="Street/Village/Mohalla/Colony"
                     value={formData.address}
                     onChange={handleChange}
-                    className="px-3 py-1 font-medium border border-gray-300 rounded shadow-2xs w-7xl"
+                    className="px-3 py-1 border border-gray-300 rounded shadow-2xs w-7xl"
                   />
                 </div>
                 <div className="mx-2 flex  gap-4 pt-3 ">
@@ -317,7 +315,7 @@ const Register = () => {
                     placeholder="city/town/area"
                     value={formData.city}
                     onChange={handleChange}
-                    className="px-3 py-1 font-medium border border-gray-300 rounded shadow-2xs w-7xl"
+                    className="px-3 py-1 border border-gray-300 rounded shadow-2xs w-7xl"
                   />
                 </div>
                 <div className="mx-2 flex  gap-4 pt-3 ">
@@ -331,7 +329,7 @@ const Register = () => {
                     placeholder="Enter six digit code"
                     value={formData.pinCode}
                     onChange={handleChange}
-                    className="px-3 py-1 font-medium border border-gray-300 rounded shadow-2xs w-7xl"
+                    className="px-3 py-1 border border-gray-300 rounded shadow-2xs w-7xl"
                   />
                 </div>
               </div>
@@ -339,34 +337,36 @@ const Register = () => {
 
             {/* Graduation Details */}
             <div className="mt-4 flex flex-col px-5 ">
-              <h3 className=" text-blue-500">Graduation Details</h3>
-              <div className="border border-e-black rounded  shadow p-3">
+              <h3 className="text-2xl font-bold py-2 text-blue-600 text-shadow-pink-200 text-shadow-md">
+                Graduation Details
+              </h3>
+              <div className="border border-e-black rounded  shadow p-3 bg-white">
                 <div className="mx-2 flex  gap-4 pt-3 ">
-                  <label htmlFor="graduationName" className="gap-3 w-60">
-                    Graduation :
+                  <label htmlFor="guardianName" className="gap-3 w-60">
+                    Guradian Name :
                   </label>
                   <input
                     type="text"
-                    name="graduationName"
-                    id="graduationName"
-                    placeholder="Degree details"
+                    name="guardianName"
+                    id="guardianName"
+                    placeholder="Local guardian's name"
                     value={formData.guardianName}
                     onChange={handleChange}
-                    className="px-3 py-1 font-medium border border-gray-300 rounded shadow-2xs w-7xl"
+                    className="px-3 py-1 border border-gray-300 rounded shadow-2xs w-7xl"
                   />
                 </div>
                 <div className="mx-2 flex  gap-4 pt-3 ">
-                  <label htmlFor="graduationNumber" className="gap-3 w-60">
-                    Grade:
+                  <label htmlFor="guardianNumber" className="gap-3 w-60">
+                    Guradian Number:
                   </label>
                   <input
                     type="text"
-                    name="graduationNumber"
-                    id="graduationNumber"
+                    name="guardianContact"
+                    id="guardianContact"
                     value={formData.guardianContact}
                     onChange={handleChange}
-                    placeholder="Grades in CGPA"
-                    className="px-3 py-1 font-medium border border-gray-300 rounded shadow-2xs w-7xl"
+                    placeholder="Local guardian number"
+                    className="px-3 py-1 border border-gray-300 rounded shadow-2xs w-7xl"
                   />
                 </div>
               </div>
@@ -374,8 +374,10 @@ const Register = () => {
 
             {/* Additional Information */}
             <div className="mt-4 flex flex-col px-5 ">
-              <h3 className="text-blue-500">Additional Information</h3>
-              <div className="border border-e-black rounded shadow p-3 ">
+              <h3 className="text-2xl font-bold py-2 text-blue-600 text-shadow-pink-200 text-shadow-md">
+                Additional Informations
+              </h3>
+              <div className="border border-e-black rounded shadow p-3 bg-white">
                 <div className="mx-2 pt-3 grid grid-cols-2">
                   <label htmlFor="coachingInfo" className="">
                     How did you hear about us ? :
@@ -385,7 +387,7 @@ const Register = () => {
                     id="coachingInfo"
                     value={formData.coachingInfo}
                     onChange={handleChange}
-                    className="px-3 py-1 font-medium border border-gray-300 rounded shadow-2xs"
+                    className="px-3 py-1 border border-gray-300 rounded shadow-2xs"
                   >
                     <option value="">--Select--</option>
                     <option value="Friend">Friends</option>
@@ -400,13 +402,18 @@ const Register = () => {
 
             {/* Button */}
 
-            <div className="text-center text-[18px] font-bold mt-4 border-t-2 border-gray-200 p-3">
+            <div className="text-center text-[20px] font-bold mt-3 p-5 grid grid-cols-2 gap-7">
               <button
-                // className="border-2 border-[#07a60b] rounded px-4 py-1.5 text-[#07a60b] hover:bg-[#07a60b] hover:text-white"
-                className="bg-linear-to-r from-indigo-600 to-indigo-700 text-white py-2 px-10 border rounded hover:from-indigo-700 hover:to-indigo-800 transition duration-300 transform hover:scale-105 shadow-lg"
                 type="submit"
+                className="border bg-indigo-700 rounded-xl px-6 py-2 text-white hover:scale-110 hover:duration-300 cursor-pointer hover:shadow-indigo-200 shadow-lg scale-100 duration-300"
               >
                 Submit Registration
+              </button>
+              <button
+                type="reset"
+                className="bg-gray-500 rounded-xl px-6 py-2 text-black hover:scale-110 hover:duration-300 cursor-pointer hover:shadow-indigo-200 shadow-lg scale-100 duration-300"
+              >
+                Clear Form
               </button>
             </div>
           </div>
@@ -414,7 +421,7 @@ const Register = () => {
 
         {/* Footer */}
 
-        <div className="mt-3 text-center">
+        <div className="my-3 text-gray-500 text-xs text-center">
           <p>All fields marked are mandatory. We respect your privacy.</p>
         </div>
       </div>
